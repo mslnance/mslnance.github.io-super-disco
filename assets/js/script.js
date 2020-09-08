@@ -1,7 +1,11 @@
+var sItems = [];
+
 //Display date in header
 var today=moment().format("dddd, MMMM Do");
 var now =new Date();
 document.getElementById("currentDay").innerHTML=today;
+
+//Audit hour
 var colorCode = function() {
   if (moment().isAfter(displayDate,'hour')) {
     $(`#schItem${i}`).addClass("past");
@@ -11,7 +15,7 @@ var colorCode = function() {
     else $(`#schItem${i}`).addClass("present");
     
 }
-//build grid
+//build time block grid
 for (var i=9; i<24; i++){
   var curDay = new Date();
   var calDate = new Date(curDay.getFullYear()+'-'+(curDay.getMonth()+1)+'-'+curDay.getDate() + " " + i +":00");
@@ -19,10 +23,10 @@ for (var i=9; i<24; i++){
   var displayDate=moment(calDate,"hA");
   var displayHour=moment(displayDate).format("hA");
   var curHour=moment().format("hA");
-  console.log(curHour);
-  console.log(displayHour);
-  console.log(moment());
-  console.log(displayDate);
+ // console.log(curHour);
+ // console.log(displayHour);
+ // console.log(moment());
+ // console.log(displayDate);
   $('<div>',{id:`b${i}`}).addClass("row").appendTo($("div.container"))
   $('<div>',{id:`hb${i}`}).addClass("col-1 hour").appendTo($(`#b${+i}`))
   $('<span>',{id:`timeSpan${i}`}).addClass("time").text(displayHour).appendTo($(`#hb${i}`))
@@ -35,83 +39,14 @@ for (var i=9; i<24; i++){
   $('<i>',{id:`saveIcon${i}`}).addClass("fas fa-save").appendTo($(`#saveSpan${i}`))
 }
 
-
-
- 
- /*
-  $('<textarea>').each(function() {
-    if (dateCalHour<curHour) {
-      $(this).addClass("past");
-    } 
-    else if (dateCalHour>curHour) {
-      $(this).addClass("future");
-    }
-    else if (dateCalHour===curHour) {
-      $(this).addClass("present");
-    }
-  };*/
-
-/*
-var timeEl = document.querySelector(".hour");
-
-var createEvents = function(eventText,eventTime) {
-  // create elements that make up a task item
-  // append span and p element to parent li
-  taskLi.append(taskSpan, taskP);
-
-  // check due date
-  auditTask(taskLi);
-
-  // append to ul list on the page
-  $("#list-" + taskList).append(taskLi);
-};
-
-//display Current Day
-
-
-var curHour=moment().format("hA");
-console.log(curHour)
-
-//var textEl = document.querySelector("textarea");
-//var textIdEl=textEl.getAttribute("id");
-var spanEl = document.querySelector("span");
-
-// loop over object properties
-$('.hour').each(function(index,obj) {
-  // then loop over sub-array
-  
-  var calHour=$(obj).find("span").text().trim();
-  var calDate = new Date("2020-09-06 " + calHour);
-  var dateCalHour=calDate.getHours();
-  
-  var dateCurHour=now.getHours();
-  //console.log(calDate)
-  console.log(dateCurHour );
-  console.log(dateCalHour );
-  $('textarea').each(function() {
-    if (dateCalHour<dateCurHour) {
-        
-      $(this).addClass("past");
-      $(this).removeClass("present");
-      $(this).removeClass("future");
-    } 
-    else if (dateCalHour>dateCurHour) {
-      
-      $(this).addClass("future");
-      $(this).removeClass("present");
-      $(this).removeClass("past");
-    }
-    else if (dateCalHour===dateCurHour) {
-      
-      $(this).addClass("present");
-      $(this).removeClass("past");
-      $(this).removeClass("future");
-    }
-    var setTime=timeEl.setAttribute("textContent",curHour);
-    console.log(setTime)
-  });
-
+$("div").on("click", "i", function() {
+  console.log("<i> was clicked");
+  //saveItems();
 });
+
+
+ /*
+
 
 var loadEvents = function() {
   events = JSON.parse(localStorage.getItem("events"));
@@ -129,7 +64,7 @@ var loadEvents = function() {
   });
 };
 
-var saveEvents = function() {
+var saveItems = function() {
   localStorage.setItem("events", JSON.stringify(events));
 };
 
@@ -144,20 +79,17 @@ $(".saveBtn").click(function(calHour) {
 
     
     // save in tasks array
-    events.toDo.push({
+    sItems.push({
       text: eventText,
       date: eventTime
     });
 
-    saveEvents();
+    saveItems();
   }
 });
 
 
-$("div").on("click", "i", function() {
-  console.log("<i> was clicked");
-  saveEvents();
-});
+
 */
 
 
